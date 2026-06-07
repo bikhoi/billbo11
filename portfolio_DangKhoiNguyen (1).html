@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Portfolio - Đặng Khôi Nguyên | AI & Digital Skills</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+ <style>
+ :root {
+ --blue-dark: #0c2d48;
+ --blue-mid: #145374;
+ --blue-accent: #2e8bc0;
+ --blue-light: #57c5f8;
+ --blue-pale: #b8e8ff;
+ --cyan-glow: #00d4ff;
+ --cream: #f0f8ff;
+ --text-main: #1a202c;
+ --text-muted: #4a5568;
+ --white: #ffffff;
+ --border: rgba(46, 139, 192, 0.15);
+ --glass: rgba(255, 255, 255, 0.08);
+ --shadow: 0 10px 30px rgba(12, 45, 72, 0.1);
+ --shadow-hover: 0 15px 40px rgba(12, 45, 72, 0.2);
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+ background-color: var(--cream);
+ color: var(--text-main);
+ line-height: 1.7;
+ overflow-x: hidden;
+ }
+
+ /* Custom Scrollbar */
+ ::-webkit-scrollbar { width: 10px; }
+ ::-webkit-scrollbar-track { background: var(--cream); }
+ ::-webkit-scrollbar-thumb { 
+ background: linear-gradient(180deg, var(--blue-accent), var(--blue-light)); 
+ border-radius: 10px; 
+ }
+ ::-webkit-scrollbar-thumb:hover { background: var(--blue-mid); }
+
+ /* ===== NAVIGATION ===== */
+ nav {
+ position: fixed; top: 0; width: 100%; 
+ background: rgba(240, 248, 255, 0.85);
+ backdrop-filter: blur(20px); 
+ z-index: 1000; padding: 1rem 5%;
+ display: flex; justify-content: space-between; align-items: center;
+ border-bottom: 1px solid var(--border);
+ transition: all 0.3s ease;
+ }
+ nav.scrolled { padding: 0.7rem 5%; box-shadow: var(--shadow); }
+ .logo { 
+ font-weight: 800; color: var(--blue-dark); font-size: 1.3rem; 
+ letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;
+ }
+ .logo-dot {
+ width: 10px; height: 10px; background: var(--cyan-glow); 
+ border-radius: 50%; box-shadow: 0 0 10px var(--cyan-glow);
+ animation: pulse 2s infinite;
+ }
+ .nav-links { display: flex; gap: 2rem; list-style: none; }
+ .nav-links a {
+ text-decoration: none; color: var(--text-muted); font-weight: 600;
+ transition: all 0.3s; position: relative; font-size: 0.95rem;
+ }
+ .nav-links a:hover { color: var(--blue-accent); }
+ .nav-links a::after {
+ content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+ background: linear-gradient(90deg, var(--blue-accent), var(--cyan-glow)); 
+ transition: width 0.3s;
+ }
+ .nav-links a:hover::after { width: 100%; }
+
+ /* ===== HERO SECTION - PREMIUM ===== */
+ .hero {
+ min-height: 100vh; display: flex; align-items: center;
+ justify-content: center; position: relative; overflow: hidden;
+ background: linear-gradient(135deg, #0c2d48 0%, #145374 30%, #2e8bc0 70%, #57c5f8 100%);
+ padding: 0 2rem;
+ }
+ 
+ /* Animated Mesh Gradient */
+ .hero::before {
+ content: ''; position: absolute; width: 200%; height: 200%;
+ background: 
+ radial-gradient(circle at 20% 80%, rgba(87, 197, 248, 0.3) 0%, transparent 50%),
+ radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+ radial-gradient(circle at 40% 40%, rgba(46, 139, 192, 0.3) 0%, transparent 50%);
+ animation: meshMove 20s ease-in-out infinite;
+ }
+
+ /* Floating Particles */
+ .particles {
+ position: absolute; width: 100%; height: 100%; overflow: hidden;
+ }
+ .particle {
+ position: absolute; background: rgba(255, 255, 255, 0.1);
+ border-radius: 50%; pointer-events: none;
+ animation: float-particle linear infinite;
+ }
+
+ /* Grid Pattern Overlay */
+ .grid-overlay {
+ position: absolute; width: 100%; height: 100%;
+ background-image: 
+ linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+ background-size: 50px 50px;
+ animation: gridMove 10s linear infinite;
+ }
+
+ .hero-content {
+ position: relative; z-index: 10; text-align: center;
+ max-width: 900px; width: 100%;
+ }
+
+ /* Avatar */
+ .avatar-container {
+ margin: 0 auto 2rem; position: relative; width: 140px; height: 140px;
+ }
+ .avatar-ring {
+ position: absolute; inset: -5px; border-radius: 50%;
+ background: conic-gradient(from 0deg, var(--cyan-glow), var(--blue-light), var(--blue-accent), var(--cyan-glow));
+ animation: spin 4s linear infinite;
+ }
+ .avatar {
+ position: relative; width: 140px; height: 140px; border-radius: 50%;
+ background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
+ display: flex; align-items: center; justify-content: center;
+ font-size: 3.5rem; color: white; z-index: 2;
+ border: 4px solid rgba(255,255,255,0.1);
+ box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+ }
+ .avatar-badge {
+ position: absolute; bottom: 5px; right: 5px; width: 30px; height: 30px;
+ background: #10b981; border-radius: 50%; border: 3px solid var(--blue-dark);
+ z-index: 3; display: flex; align-items: center; justify-content: center;
+ font-size: 0.8rem;
+ }
+
+ /* Status Badge */
+ .status-badge {
+ display: inline-flex; align-items: center; gap: 8px;
+ background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+ border: 1px solid rgba(255, 255, 255, 0.2);
+ padding: 0.5rem 1.5rem; border-radius: 50px;
+ color: var(--blue-pale); font-size: 0.9rem; font-weight: 500;
+ margin-bottom: 1.5rem; animation: fadeInDown 1s ease-out;
+ }
+ .status-dot {
+ width: 8px; height: 8px; background: #10b981; border-radius: 50%;
+ box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite;
+ }
+
+ .hero h1 {
+ font-size: clamp(2.5rem, 6vw, 4.5rem); color: white;
+ margin-bottom: 0.5rem; font-weight: 900; letter-spacing: -2px;
+ animation: fadeInUp 1s ease-out 0.2s backwards;
+ text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+ }
+ .hero h1 .gradient-text {
+ background: linear-gradient(135deg, #fff 0%, var(--cyan-glow) 50%, var(--blue-light) 100%);
+ -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+ background-clip: text;
+ }
+
+ .hero-subtitle {
+ font-size: clamp(1rem, 2vw, 1.3rem); color: var(--blue-pale);
+ margin-bottom: 1rem; font-weight: 400; opacity: 0.9;
+ animation: fadeInUp 1s ease-out 0.4s backwards;
+ }
+ 
+ /* Typing Effect */
+ .typing-container {
+ margin-bottom: 2.5rem; animation: fadeInUp 1s ease-out 0.6s backwards;
+ }
+ .typing-text {
+ font-size: 1.1rem; color: rgba(255,255,255,0.8);
+ font-family: 'Courier New', monospace; font-weight: 500;
+ }
+ .typing-cursor {
+ display: inline-block; width: 2px; height: 1.2em;
+ background: var(--cyan-glow); margin-left: 2px;
+ animation: blink 1s step-end infinite; vertical-align: text-bottom;
+ }
+
+ /* Quick Stats */
+ .quick-stats {
+ display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+ margin-bottom: 2.5rem; animation: fadeInUp 1s ease-out 0.8s backwards;
+ }
+ .stat-card {
+ background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px);
+ border: 1px solid rgba(255, 255, 255, 0.15);
+ padding: 1rem 1.5rem; border-radius: 16px;
+ display: flex; align-items: center; gap: 12px;
+ transition: all 0.3s ease; cursor: default;
+ min-width: 180px;
+ }
+ .stat-card:hover {
+ transform: translateY(-3px);
+ background: rgba(255, 255, 255, 0.12);
+ border-color: var(--cyan-glow);
+ box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+ }
+ .stat-icon {
+ width: 40px; height: 40px; border-radius: 10px;
+ background: linear-gradient(135deg, var(--blue-accent), var(--cyan-glow));
+ display: flex; align-items: center; justify-content: center;
+ font-size: 1.2rem;
+ }
+ .stat-info { text-align: left; }
+ .stat-label { font-size: 0.75rem; color: var(--blue-pale); opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+ .stat-value { font-size: 1rem; color: white; font-weight: 700; }
+
+ .cta-group {
+ display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+ animation: fadeInUp 1s ease-out 1s backwards;
+ position: relative; z-index: 5; margin-bottom: 3rem;
+ }
+ .cta-btn {
+ padding: 0.9rem 2.2rem; border-radius: 50px; font-weight: 700;
+ text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;
+ display: inline-flex; align-items: center;
+ border: 2px solid transparent;
+ }
+ .cta-primary {
+ background: linear-gradient(135deg, var(--cyan-glow), var(--blue-light));
+ color: var(--blue-dark); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+ }
+ .cta-primary:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 10px 30px rgba(0, 212, 255, 0.6);
+ }
+ .cta-secondary {
+ background: rgba(255,255,255,0.15);
+ backdrop-filter: blur(10px);
+ color: white;
+ border-color: rgba(255, 255, 255, 0.5);
+ }
+ .cta-secondary:hover {
+ background: rgba(255, 255, 255, 0.25);
+ border-color: white;
+ }
+
+
+
+ /* Wave Divider */
+ .wave-divider {
+ position: absolute; bottom: -2px; left: 0; width: 100%;
+ line-height: 0; overflow: hidden;
+ }
+ .wave-divider svg {
+ width: 100%; height: 80px; fill: var(--cream);
+ }
+
+ /* ===== SECTIONS ===== */
+ section { padding: 6rem 10%; max-width: 1200px; margin: 0 auto; }
+ .section-header { text-align: center; margin-bottom: 4rem; }
+ .section-tag {
+ display: inline-flex; align-items: center; gap: 6px;
+ background: var(--blue-pale); color: var(--blue-mid);
+ padding: 0.4rem 1rem; border-radius: 50px;
+ font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+ text-transform: uppercase; margin-bottom: 1rem;
+ }
+ .section-title {
+ font-size: clamp(2rem, 4vw, 3rem); color: var(--blue-dark);
+ font-weight: 900; letter-spacing: -1px; margin-bottom: 1rem;
+ position: relative; display: inline-block;
+ }
+ .section-title::after {
+ content: ''; position: absolute; bottom: -10px; left: 50%;
+ transform: translateX(-50%); width: 60px; height: 4px;
+ background: linear-gradient(90deg, var(--blue-accent), var(--cyan-glow));
+ border-radius: 2px;
+ }
+ .section-desc { 
+ color: var(--text-muted); font-size: 1.1rem; max-width: 700px; 
+ margin: 1.5rem auto 0; line-height: 1.8;
+ }
+
+ /* ===== ABOUT SECTION ===== */
+ .about-intro {
+ background: white; border-radius: 24px; padding: 3rem;
+ border: 1px solid var(--border); box-shadow: var(--shadow);
+ margin-bottom: 3rem; position: relative; overflow: hidden;
+ }
+ .about-intro::before {
+ content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+ background: linear-gradient(90deg, var(--blue-accent), var(--cyan-glow), var(--blue-light));
+ }
+ .about-intro h3 {
+ color: var(--blue-dark); font-size: 1.5rem; margin-bottom: 1rem;
+ display: flex; align-items: center; gap: 10px;
+ }
+ .about-intro p {
+ color: var(--text-muted); font-size: 1.05rem; line-height: 1.9;
+ margin-bottom: 1rem;
+ }
+ .about-intro p:last-child { margin-bottom: 0; }
+
+ .about-grid { 
+ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+ gap: 1.5rem; 
+ }
+ .about-card {
+ background: white; padding: 2rem; border-radius: 20px;
+ border: 1px solid var(--border); transition: all 0.4s ease;
+ position: relative; overflow: hidden;
+ }
+ .about-card::before {
+ content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+ background: linear-gradient(135deg, rgba(46, 139, 192, 0.03), rgba(0, 212, 255, 0.03));
+ opacity: 0; transition: opacity 0.4s ease;
+ }
+ .about-card:hover { 
+ transform: translateY(-5px); 
+ box-shadow: var(--shadow-hover); 
+ border-color: var(--blue-light);
+ }
+ .about-card:hover::before { opacity: 1; }
+ .about-card h3 { 
+ color: var(--blue-dark); margin-bottom: 1rem; 
+ display: flex; align-items: center; gap: 10px;
+ font-size: 1.15rem;
+ }
+ .about-card ul { list-style: none; padding: 0; }
+ .about-card li {
+ padding: 0.6rem 0; padding-left: 1.5rem; position: relative;
+ color: var(--text-muted); font-size: 0.95rem;
+ }
+ .about-card li::before {
+ content: ''; position: absolute; left: 0; color: var(--blue-accent);
+ font-weight: bold;
+ }
+ .card-icon {
+ width: 45px; height: 45px; border-radius: 12px;
+ background: linear-gradient(135deg, var(--blue-pale), rgba(0, 212, 255, 0.2));
+ display: flex; align-items: center; justify-content: center;
+ font-size: 1.3rem; margin-bottom: 1rem;
+ }
+
+ /* ===== PROJECTS SECTION ===== */
+ .projects-grid { 
+ display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+ gap: 2rem;
+ row-gap: 2.5rem;
+ }
+ .project-card {
+ background: white; border-radius: 24px; overflow: hidden;
+ border: 1px solid var(--border); cursor: pointer;
+ transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ display: flex; flex-direction: column;
+ position: relative;
+ }
+ .project-card::before {
+ content: ''; position: absolute; inset: 0; border-radius: 24px;
+ padding: 2px; background: linear-gradient(135deg, transparent, var(--blue-light), transparent);
+ -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+ -webkit-mask-composite: xor; mask-composite: exclude;
+ opacity: 0; transition: opacity 0.4s ease;
+ }
+ .project-card:hover::before { opacity: 1; }
+ .project-card:hover { 
+ transform: translateY(-10px); 
+ box-shadow: 0 20px 50px rgba(12, 45, 72, 0.15);
+ }
+ .card-header {
+ height: 160px; 
+ background: linear-gradient(135deg, var(--blue-mid), var(--blue-accent));
+ display: flex; align-items: center; justify-content: center; 
+ font-size: 3.5rem; color: white; position: relative; overflow: hidden;
+ }
+ .card-header::before {
+ content: ''; position: absolute; inset: 0;
+ background: 
+ radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 50%),
+ radial-gradient(circle at 70% 70%, rgba(0,212,255,0.3), transparent 50%);
+ }
+ .card-header-icon { position: relative; z-index: 2; width: 56px; height: 56px; background: rgba(255,255,255,0.18); backdrop-filter: blur(8px); border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+ .card-number {
+ position: absolute; top: 1rem; right: 1rem;
+ background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+ padding: 0.3rem 0.8rem; border-radius: 50px;
+ font-size: 0.8rem; font-weight: 700; color: white;
+ }
+ .card-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+ .card-body h3 { 
+ color: var(--blue-dark); margin-bottom: 0.7rem; 
+ font-size: 1.2rem; font-weight: 700;
+ }
+ .card-body p { color: var(--text-muted); font-size: 0.95rem; flex: 1; margin-bottom: 1.2rem; }
+ .card-tags {
+ display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem;
+ }
+ .card-tag {
+ background: var(--blue-pale); color: var(--blue-mid);
+ padding: 0.25rem 0.7rem; border-radius: 50px;
+ font-size: 0.75rem; font-weight: 600;
+ }
+ .card-footer {
+ display: flex; justify-content: space-between; align-items: center;
+ color: var(--blue-accent); font-weight: 700; font-size: 0.9rem;
+ padding-top: 1rem; border-top: 1px solid var(--border);
+ }
+ .arrow { 
+ transition: transform 0.3s; 
+ width: 30px; height: 30px; border-radius: 50%;
+ background: var(--blue-pale); display: flex; align-items: center;
+ justify-content: center;
+ }
+ .project-card:hover .arrow { 
+ transform: translateX(5px); 
+ background: var(--blue-accent);
+ color: white;
+ }
+
+ /* ===== MODALS ===== */
+ .modal {
+ position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+ background: rgba(12, 45, 72, 0.7); backdrop-filter: blur(12px);
+ z-index: 2000; display: flex; justify-content: center; align-items: center;
+ opacity: 0; pointer-events: none;
+ transition: opacity 0.3s ease;
+ padding: 1rem;
+ }
+ .modal.active { opacity: 1; pointer-events: all; }
+ .modal-content {
+ background: var(--cream); width: 100%; max-width: 900px; max-height: 90vh;
+ border-radius: 28px; overflow-y: auto; padding: 3rem;
+ transform: scale(0.9) translateY(20px); 
+ transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ border: 1px solid white; 
+ box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+ position: relative;
+ }
+ .modal.active .modal-content { transform: scale(1) translateY(0); }
+ 
+ .modal-content::-webkit-scrollbar { width: 6px; }
+ .modal-content::-webkit-scrollbar-track { background: transparent; }
+ .modal-content::-webkit-scrollbar-thumb { 
+ background: var(--blue-light); border-radius: 10px; 
+ }
+
+ .close-btn {
+ position: sticky; top: 0; float: right; 
+ background: white; border: 1px solid var(--border); 
+ width: 44px; height: 44px; border-radius: 50%;
+ display: flex; align-items: center; justify-content: center; 
+ cursor: pointer; font-size: 1.3rem; color: var(--text-muted); 
+ transition: all 0.3s ease; z-index: 10;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+ }
+ .close-btn:hover { 
+ background: var(--blue-accent); color: white; 
+ transform: rotate(90deg); 
+ box-shadow: 0 4px 20px rgba(46, 139, 192, 0.4);
+ }
+ 
+ .modal-header { 
+ margin-bottom: 2.5rem; 
+ border-bottom: 2px solid var(--blue-pale); 
+ padding-bottom: 1.5rem; 
+ padding-right: 60px;
+ }
+ .modal-tag {
+ display: inline-flex; align-items: center; gap: 6px;
+ background: linear-gradient(135deg, var(--blue-pale), rgba(0, 212, 255, 0.2));
+ color: var(--blue-mid); padding: 0.4rem 1rem; 
+ border-radius: 50px; font-size: 0.8rem; font-weight: 700;
+ margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;
+ }
+ .modal-header h2 { 
+ color: var(--blue-dark); font-size: 1.8rem; 
+ font-weight: 800; letter-spacing: -0.5px;
+ }
+ 
+ .modal-body h3 { 
+ color: var(--blue-mid); margin: 2rem 0 1rem; 
+ font-size: 1.2rem; font-weight: 700;
+ display: flex; align-items: center; gap: 10px;
+ padding-bottom: 0.5rem;
+ border-bottom: 1px dashed var(--border);
+ }
+ .modal-body p, .modal-body li { 
+ color: var(--text-main); margin-bottom: 0.7rem; line-height: 1.8; 
+ }
+ .modal-body ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+ .modal-body strong { color: var(--blue-dark); }
+ 
+ /* Code block style */
+ pre {
+ background: var(--blue-dark); color: #e2e8f0; 
+ padding: 1.2rem 1.5rem; border-radius: 12px; 
+ overflow-x: auto; font-family: 'Courier New', monospace;
+ font-size: 0.9rem; margin: 1rem 0 1.5rem;
+ border: 1px solid rgba(0, 212, 255, 0.2);
+ box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+ }
+ pre .folder { color: var(--cyan-glow); }
+ 
+ /* Tables in Modals */
+ .table-responsive { 
+ overflow-x: auto; margin: 1.5rem 0; 
+ border-radius: 16px; border: 1px solid var(--border);
+ background: white;
+ }
+ table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+ th { 
+ background: linear-gradient(135deg, var(--blue-pale), rgba(0, 212, 255, 0.15)); 
+ color: var(--blue-dark); text-align: left; 
+ padding: 1rem 1.2rem; font-weight: 700;
+ font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;
+ }
+ td { padding: 1rem 1.2rem; border-top: 1px solid var(--border); }
+ tr { transition: background 0.2s ease; }
+ tr:hover td { background: rgba(184, 232, 255, 0.3); }
+
+ /* Blockquotes */
+ blockquote {
+ background: linear-gradient(135deg, rgba(46, 139, 192, 0.08), rgba(0, 212, 255, 0.05));
+ border-left: 4px solid var(--blue-accent);
+ padding: 1.2rem 1.5rem; margin: 1.5rem 0; 
+ border-radius: 0 12px 12px 0;
+ color: var(--text-main); font-style: italic;
+ position: relative;
+ }
+ blockquote::before {
+ content: '"'; position: absolute; top: -10px; left: 10px;
+ font-size: 3rem; color: var(--blue-light); opacity: 0.3;
+ font-family: Georgia, serif;
+ }
+ 
+ /* Principles Grid */
+ .principles-grid { 
+ display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+ gap: 1rem; margin-top: 1.5rem; 
+ }
+ .principle-card {
+ background: white; padding: 1.3rem; border-radius: 14px;
+ border: 1px solid var(--border); transition: all 0.3s ease;
+ position: relative; overflow: hidden;
+ }
+ .principle-card::before {
+ content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+ background: linear-gradient(180deg, var(--blue-accent), var(--cyan-glow));
+ }
+ .principle-card:hover { 
+ transform: translateY(-3px); 
+ border-color: var(--blue-light);
+ box-shadow: 0 8px 20px rgba(12, 45, 72, 0.1);
+ }
+ .principle-card h4 { 
+ color: var(--blue-dark); margin-bottom: 0.5rem; 
+ font-size: 0.95rem; padding-left: 0.5rem;
+ }
+ .principle-card p { 
+ font-size: 0.85rem; color: var(--text-muted); 
+ margin: 0; padding-left: 0.5rem; 
+ }
+
+ /* ===== CONCLUSION ===== */
+ .conclusion-grid {
+ display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;
+ }
+ @media (max-width: 768px) {
+ .conclusion-grid { grid-template-columns: 1fr; }
+ }
+
+ /* ===== FOOTER ===== */
+ footer {
+ text-align: center; padding: 4rem 2rem 2rem; 
+ background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+ color: var(--blue-pale); margin-top: 4rem;
+ position: relative; overflow: hidden;
+ }
+ footer::before {
+ content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+ background: 
+ radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+ radial-gradient(circle at 80% 50%, rgba(87, 197, 248, 0.1) 0%, transparent 50%);
+ }
+ footer > * { position: relative; z-index: 2; }
+ .footer-title { 
+ font-size: 1.5rem; color: white; font-weight: 800; 
+ margin-bottom: 1rem; 
+ }
+ .footer-info { 
+ opacity: 0.8; font-size: 0.9rem; margin-bottom: 0.5rem; 
+ }
+ .footer-social {
+ display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;
+ }
+ .social-link {
+ width: 45px; height: 45px; border-radius: 50%;
+ background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+ border: 1px solid rgba(255,255,255,0.2);
+ display: flex; align-items: center; justify-content: center;
+ color: white; font-size: 1.2rem; text-decoration: none;
+ transition: all 0.3s ease;
+ }
+ .social-link:hover {
+ background: var(--cyan-glow); transform: translateY(-3px);
+ box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+ }
+ .footer-divider {
+ width: 60px; height: 3px; margin: 2rem auto;
+ background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+ }
+ .footer-copyright {
+ font-size: 0.85rem; opacity: 0.6; margin-top: 1rem;
+ }
+
+ /* ===== ANIMATIONS ===== */
+ @keyframes pulse {
+ 0%, 100% { opacity: 1; transform: scale(1); }
+ 50% { opacity: 0.7; transform: scale(1.1); }
+ }
+ @keyframes spin {
+ from { transform: rotate(0deg); }
+ to { transform: rotate(360deg); }
+ }
+ @keyframes blink {
+ 50% { opacity: 0; }
+ }
+ @keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+ 40% { transform: translateX(-50%) translateY(-10px); }
+ 60% { transform: translateX(-50%) translateY(-5px); }
+ }
+ @keyframes scrollWheel {
+ 0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+ 100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+ }
+ @keyframes meshMove {
+ 0%, 100% { transform: translate(0, 0) rotate(0deg); }
+ 33% { transform: translate(-2%, 1%) rotate(1deg); }
+ 66% { transform: translate(1%, -1%) rotate(-1deg); }
+ }
+ @keyframes gridMove {
+ from { transform: translate(0, 0); }
+ to { transform: translate(50px, 50px); }
+ }
+ @keyframes float-particle {
+ from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+ 10% { opacity: 1; }
+ 90% { opacity: 1; }
+ to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+ }
+ @keyframes fadeInUp {
+ from { opacity: 0; transform: translateY(30px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
+ @keyframes fadeInDown {
+ from { opacity: 0; transform: translateY(-20px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
+ .animate-on-scroll { 
+ opacity: 0; transform: translateY(30px); 
+ transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+ }
+ .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+ /* ===== RESPONSIVE ===== */
+ @media (max-width: 768px) {
+ nav { padding: 1rem; }
+ .nav-links { display: none; }
+ section { padding: 4rem 5%; }
+ .modal-content { padding: 2rem 1.5rem; border-radius: 20px; }
+ .table-responsive { font-size: 0.8rem; }
+ th, td { padding: 0.6rem 0.8rem; }
+ .quick-stats { flex-direction: column; align-items: center; }
+ .stat-card { width: 100%; max-width: 280px; }
+ .avatar-container { width: 110px; height: 110px; }
+ .avatar { width: 110px; height: 110px; font-size: 2.8rem; }
+ .about-intro { padding: 2rem 1.5rem; }
+ .conclusion-grid { grid-template-columns: 1fr; }
+ }
+
+ @media (max-width: 480px) {
+ .cta-group { flex-direction: column; }
+ .cta-btn { width: 100%; justify-content: center; }
+ }
+
+ /* ===== PERSONAL TOUCHES ===== */
+ .handwrite { font-family: 'Caveat', cursive; }
+
+ /* Currently widget in hero */
+ .currently-row {
+ display: flex; flex-wrap: wrap; justify-content: center;
+ gap: 0.6rem; margin-bottom: 2rem;
+ animation: fadeInUp 1s ease-out 0.7s backwards;
+ }
+ .currently-pill {
+ display: flex; align-items: center; gap: 6px;
+ background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+ border: 1px solid rgba(255,255,255,0.15);
+ padding: 0.4rem 0.9rem; border-radius: 50px;
+ font-size: 0.82rem; color: rgba(255,255,255,0.85);
+ }
+ .currently-pill .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+ .currently-pill .label { opacity: 0.6; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+ /* Honest skill bars */
+ .skills-section { margin-top: 2.5rem; }
+ .skill-group { margin-bottom: 2rem; }
+ .skill-group-title {
+ font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+ letter-spacing: 0.08em; color: var(--blue-mid); margin-bottom: 1rem;
+ }
+ .skill-item { margin-bottom: 0.9rem; }
+ .skill-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+ .skill-name { font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
+ .skill-level { font-size: 0.75rem; color: var(--text-muted); }
+ .skill-bar { height: 6px; background: var(--blue-pale); border-radius: 10px; overflow: hidden; }
+ .skill-fill {
+ height: 100%; border-radius: 10px;
+ background: linear-gradient(90deg, var(--blue-accent), var(--cyan-glow));
+ width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+ }
+ .skill-fill.animate { width: var(--w); }
+
+ /* Sticky note */
+ .sticky-note {
+ background: #fffde7; border-radius: 4px 16px 16px 4px;
+ padding: 1.2rem 1.5rem; position: relative;
+ box-shadow: 3px 4px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+ border-left: 4px solid #ffd54f;
+ font-family: 'Caveat', cursive; font-size: 1.1rem;
+ color: #4a4000; line-height: 1.7; transform: rotate(-0.5deg);
+ }
+ .sticky-note .sticky-label {
+ font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+ color: #999; margin-bottom: 0.5rem; font-family: 'Segoe UI', sans-serif;
+ font-weight: 700;
+ }
+ .sticky-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+
+ /* Card metadata */
+ .card-meta {
+ display: flex; gap: 0.8rem; margin-bottom: 0.8rem;
+ font-size: 0.75rem; color: var(--text-muted);
+ }
+ .card-meta span { display: flex; align-items: center; gap: 3px; }
+
+ /* Personal note in modal */
+ .personal-note {
+ background: #fffde7; border-left: 3px solid #ffd54f;
+ padding: 0.8rem 1rem; border-radius: 0 8px 8px 0;
+ margin: 1rem 0; font-family: 'Caveat', cursive;
+ font-size: 1rem; color: #5a4500; line-height: 1.6;
+ }
+ .personal-note::before { content: ' Ghi chú cá nhân: '; font-weight: 700; }
+
+ /* Now section */
+ .now-section {
+ background: white; border-radius: 20px; padding: 2rem;
+ border: 1px solid var(--border); margin-top: 2rem;
+ display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start;
+ }
+ .now-label {
+ writing-mode: vertical-rl; text-orientation: mixed;
+ font-family: 'Caveat', cursive; font-size: 1.3rem;
+ color: var(--blue-accent); letter-spacing: 3px; padding: 0.5rem;
+ border-right: 2px dashed var(--blue-pale);
+ }
+ .now-items { display: flex; flex-direction: column; gap: 0.8rem; }
+ .now-item { display: flex; align-items: flex-start; gap: 10px; }
+ .now-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+ .now-item-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+ .now-item-text strong { color: var(--text-main); }
+ </style>
+</head>
+<body>
+
+ <!-- Navigation -->
+ <nav id="navbar">
+ <div class="logo">
+ <span class="logo-dot"></span>
+ Đặng Khôi Nguyên
+ </div>
+ <ul class="nav-links">
+ <li><a href="#home">Trang chủ</a></li>
+ <li><a href="#about">Giới thiệu</a></li>
+ <li><a href="#projects">Dự án</a></li>
+ <li><a href="#conclusion">Tổng kết</a></li>
+ </ul>
+ </nav>
+
+ <!-- Hero Section -->
+ <header id="home" class="hero">
+ <div class="grid-overlay"></div>
+ <div class="particles" id="particles"></div>
+ 
+ <div class="hero-content">
+ <!-- Avatar -->
+ <div class="avatar-container">
+ <div class="avatar-ring"></div>
+ <div class="avatar"></div>
+ <div class="avatar-badge"></div>
+ </div>
+
+ <!-- Currently -->
+ <div class="currently-row">
+ <div class="currently-pill">
+ <span class="dot" style="background:#10b981;box-shadow:0 0 6px #10b981"></span>
+ <span class="label">Đang học</span>
+ <span>Năm 1 · AI · ĐHQGHN</span>
+ </div>
+ <div class="currently-pill">
+ <span class="dot" style="background:#f59e0b"></span>
+ <span class="label">Đọc</span>
+ <span>Deep Learning (Goodfellow)</span>
+ </div>
+ <div class="currently-pill">
+ <span class="dot" style="background:#8b5cf6"></span>
+ <span class="label">Làm</span>
+ <span>Portfolio VNU1001</span>
+ </div>
+ </div>
+
+ <!-- Name -->
+ <h1>Đặng <span class="gradient-text">Khôi Nguyên</span></h1>
+ <p class="hero-subtitle">Sinh viên Trí tuệ Nhân tạo · Đại học Quốc gia Hà Nội</p>
+
+ <!-- Typing Effect -->
+ <div class="typing-container">
+ <span class="typing-text" id="typingText"></span>
+ <span class="typing-cursor"></span>
+ </div>
+
+ <!-- Quick Stats -->
+ <div class="quick-stats">
+ <div class="stat-card">
+ 
+ <div class="stat-info">
+ <div class="stat-label">MSSV</div>
+ <div class="stat-value">25022963</div>
+ </div>
+ </div>
+ <div class="stat-card">
+ 
+ <div class="stat-info">
+ <div class="stat-label">Học phần</div>
+ <div class="stat-value">VNU1001</div>
+ </div>
+ </div>
+ <div class="stat-card">
+ 
+ <div class="stat-info">
+ <div class="stat-label">Dự án</div>
+ <div class="stat-value">6 Hoàn thành</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- CTA -->
+ <div class="cta-group">
+ <a href="#projects" class="cta-btn cta-primary">Khám phá Dự án</a>
+ <a href="#about" class="cta-btn cta-secondary">Về tôi</a>
+ </div>
+ </div>
+
+ <!-- Wave Divider -->
+ <div class="wave-divider">
+ <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+ <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"></path>
+ </svg>
+ </div>
+ </header>
+
+ <!-- About Section -->
+ <section id="about">
+ <div class="section-header animate-on-scroll">
+ <div class="section-tag">
+ 
+ <span>Giới thiệu</span>
+ </div>
+ <h2 class="section-title">Về Tôi</h2>
+ <p class="section-desc">Hành trình khám phá AI và xây dựng nền tảng kỹ năng số vững chắc</p>
+ </div>
+
+ <!-- Intro Card -->
+ <div class="about-intro animate-on-scroll">
+ <h3> Xin chào — mình là Khôi Nguyên</h3>
+ <p>Sinh viên năm 1, ngành Trí tuệ Nhân tạo tại ĐHQGHN. Mình chọn AI không phải vì nó "hot" — mà vì mình thật sự tò mò về cách máy móc có thể học từ dữ liệu và đưa ra quyết định. Câu hỏi đó đã kéo mình vào ngành này từ hồi cấp 3.</p>
+ <p>Năm đầu đại học thật ra khó hơn mình nghĩ. Toán nhiều hơn dự kiến. Có những tuần mình code sai từ sáng đến tối mà không hiểu tại sao. Nhưng cũng có những khoảnh khắc mình chạy được đoạn code đầu tiên và nó thật sự hoạt động — cảm giác đó khó tả lắm.</p>
+ <p>Ngoài học, mình hay đọc về ứng dụng AI trong y tế và viễn thông — hai lĩnh vực mình thấy AI đang tạo ra tác động thực sự, không chỉ là demo đẹp. Mình cũng đang tập thói quen ghi chú khi đọc, vì hay quên lắm </p>
+ </div>
+
+ <!-- Now section -->
+ <div class="now-section animate-on-scroll">
+ <div class="now-label">ngay lúc này</div>
+ <div class="now-items">
+ <div class="now-item">
+ <span class="now-item-icon"></span>
+ <span class="now-item-text"><strong>Đang đọc:</strong> Deep Learning (Goodfellow et al.) — chương về Convolutional Networks. Đọc chậm vì phải tra toán nhiều.</span>
+ </div>
+ <div class="now-item">
+ <span class="now-item-icon"></span>
+ <span class="now-item-text"><strong>Đang làm:</strong> Portfolio cuối kỳ VNU1001 — cái mà bạn đang đọc đây. Mất nhiều thời gian hơn nghĩ ban đầu.</span>
+ </div>
+ <div class="now-item">
+ <span class="now-item-icon"></span>
+ <span class="now-item-text"><strong>Đang tập:</strong> Viết code Python sạch hơn và bỏ thói quen đặt biến tên <code>a</code>, <code>b</code>, <code>x1</code>.</span>
+ </div>
+ <div class="now-item">
+ <span class="now-item-icon"></span>
+ <span class="now-item-text"><strong>Nghe lúc học:</strong> Lo-fi hip hop radio. Không biết tại sao nhưng tập trung hơn hẳn.</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Skills - honest version -->
+ <div class="about-intro animate-on-scroll" style="margin-top:2rem;">
+ <h3> Kỹ năng — đánh giá thật</h3>
+ <p style="margin-bottom:1.5rem;font-size:0.9rem;color:var(--text-muted);">Tự đánh giá sau 1 năm học. Không phóng đại, không khiêm tốn quá.</p>
+ <div class="skills-section">
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;">
+ <div class="skill-group">
+ <div class="skill-group-title">Công cụ AI & Tìm kiếm</div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Prompt Engineering</span><span class="skill-level">Khá tốt</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Google Scholar / PubMed</span><span class="skill-level">Tốt</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Generative AI (Claude, DALL-E)</span><span class="skill-level">Khá tốt</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:72%"></div></div>
+ </div>
+ </div>
+ <div class="skill-group">
+ <div class="skill-group-title">Cộng tác & Tổ chức</div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Google Workspace</span><span class="skill-level">Tốt</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Trello / Quản lý dự án</span><span class="skill-level">Cơ bản</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:60%"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Quản lý tệp tin hệ thống</span><span class="skill-level">Tốt</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:78%"></div></div>
+ </div>
+ </div>
+ <div class="skill-group">
+ <div class="skill-group-title">Đang học thêm </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Python (NumPy, Pandas)</span><span class="skill-level">Đang học</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:40%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">Machine Learning cơ bản</span><span class="skill-level">Đang học</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:35%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+ </div>
+ <div class="skill-item">
+ <div class="skill-top"><span class="skill-name">HTML / CSS / GitHub</span><span class="skill-level">Mới bắt đầu</span></div>
+ <div class="skill-bar"><div class="skill-fill" style="--w:25%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Sticky notes -->
+ <div class="sticky-grid animate-on-scroll">
+ <div class="sticky-note" style="transform:rotate(-1.2deg)">
+ <div class="sticky-label">Điều tâm đắc nhất</div>
+ AI không phải oracle. Nó là intern cần mình hướng dẫn rõ ràng. Prompt tốt = kết quả tốt. Học được điều này từ Bài 3 
+ </div>
+ <div class="sticky-note" style="transform:rotate(0.8deg);background:#e8f5e9;border-color:#66bb6a;color:#1b4a1e">
+ <div class="sticky-label">Thách thức lớn nhất</div>
+ Cân bằng giữa dùng AI và tự làm. Lúc đầu hay "hỏi AI trước, nghĩ sau" — sai rồi. Phải đảo lại.
+ </div>
+ <div class="sticky-note" style="transform:rotate(-0.5deg);background:#e3f2fd;border-color:#42a5f5;color:#0d2a4a">
+ <div class="sticky-label">Kế hoạch năm 2</div>
+ Học PyTorch, làm 1 project ML thật, đóng góp được vào 1 repo GitHub nào đó dù chỉ là fix typo 
+ </div>
+ </div>
+
+ <!-- Portfolio Purpose -->
+ <div class="about-intro animate-on-scroll" style="margin-top: 2rem;">
+ <h3> Tại sao có cái Portfolio này?</h3>
+ <p>Thật ra mình không nghĩ sẽ thích làm Portfolio đâu — nghe có vẻ là bài tập cho có. Nhưng khi bắt đầu tổng hợp lại 6 bài tập, mình mới nhận ra mình đã làm được nhiều hơn mình nghĩ. Từ quản lý file đơn giản đến đánh giá nguồn học thuật, viết Prompt, làm việc nhóm trực tuyến — mỗi bài là một kỹ năng thực tế.</p>
+ <p>Portfolio này là cách mình chứng minh với bản thân rằng mình đã học thật, không phải học cho qua. Và nếu sau này nhìn lại, mình sẽ thấy mình bắt đầu từ đâu.</p>
+ </div>
+ </section>
+
+ <!-- Projects Section -->
+ <section id="projects">
+ <div class="section-header animate-on-scroll">
+ <div class="section-tag">
+ 
+ <span>Dự án</span>
+ </div>
+ <h2 class="section-title">6 Bài tập Lớn</h2>
+ <p class="section-desc">Nhấp vào từng thẻ để xem chi tiết quá trình, thách thức và sản phẩm</p>
+ </div>
+ 
+ <div class="projects-grid">
+ <!-- Card 1 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal1')">
+ <div class="card-header">
+ <span class="card-number">01</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>Tệp tin & Thư mục</h3>
+ <div class="card-meta">
+ <span>⏱ ~3 giờ</span>
+ <span> Dễ nhất trong 6 bài</span>
+ </div>
+ <p>Thực hành 12 thao tác File Explorer: tạo, đổi tên, sao chép, di chuyển, xóa và khôi phục. Có ảnh chụp từng bước.</p>
+ <div class="card-tags">
+ <span class="card-tag">File Management</span>
+ <span class="card-tag">Windows</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Card 2 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal2')">
+ <div class="card-header" style="background: linear-gradient(135deg, #145374, #00d4ff);">
+ <span class="card-number">02</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>Tìm kiếm Học thuật</h3>
+ <div class="card-meta">
+ <span>⏱ ~6 giờ</span>
+ <span> 10 nguồn đánh giá</span>
+ </div>
+ <p>Đánh giá 10 nguồn về ML trong y tế qua 4 cơ sở dữ liệu học thuật. Bảng tiêu chí chi tiết.</p>
+ <div class="card-tags">
+ <span class="card-tag">Research</span>
+ <span class="card-tag">Critical Thinking</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Card 3 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal3')">
+ <div class="card-header" style="background: linear-gradient(135deg, #2e8bc0, #57c5f8);">
+ <span class="card-number">03</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>Prompt Engineering</h3>
+ <div class="card-meta">
+ <span>⏱ ~5 giờ</span>
+ <span> Bài yêu thích</span>
+ </div>
+ <p>3 tác vụ × 3 phiên bản prompt. 8 nguyên tắc cốt lõi. So sánh kết quả Cơ bản vs Nâng cao.</p>
+ <div class="card-tags">
+ <span class="card-tag">Prompt Engineering</span>
+ <span class="card-tag">LLM</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Card 4 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal4')">
+ <div class="card-header" style="background: linear-gradient(135deg, #0c2d48, #2e8bc0);">
+ <span class="card-number">04</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>Hợp tác Nhóm Trực tuyến</h3>
+ <div class="card-meta">
+ <span>⏱ 7 ngày</span>
+ <span> Nhóm 3 người</span>
+ </div>
+ <p>Dự án nhóm thực tế về "AI trong viễn thông". Trello, Docs, Drive, Discord — phân công rõ từng ngày.</p>
+ <div class="card-tags">
+ <span class="card-tag">Collaboration</span>
+ <span class="card-tag">Project Management</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Card 5 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal5')">
+ <div class="card-header" style="background: linear-gradient(135deg, #145374, #57c5f8);">
+ <span class="card-number">05</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="11" r="1.5" fill="white"/><circle cx="15.5" cy="11" r="1.5" fill="white"/><circle cx="12" cy="8" r="1.5" fill="white"/><path d="M7 16s1.5 2 5 2 5-2 5-2"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>AI Tạo sinh Nội dung</h3>
+ <div class="card-meta">
+ <span>⏱ ~4 giờ</span>
+ <span> 3 công cụ AI</span>
+ </div>
+ <p>Blog "AI thay đổi cuộc sống" dùng Claude + DALL-E 3 + Canva AI. Phân tích vai trò AI trong sáng tạo.</p>
+ <div class="card-tags">
+ <span class="card-tag">Generative AI</span>
+ <span class="card-tag">Content Creation</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Card 6 -->
+ <div class="project-card animate-on-scroll" onclick="openModal('modal6')">
+ <div class="card-header" style="background: linear-gradient(135deg, #2e8bc0, #0c2d48);">
+ <span class="card-number">06</span>
+ <span class="card-header-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+ </div>
+ <div class="card-body">
+ <h3>AI có Trách nhiệm</h3>
+ <div class="card-meta">
+ <span>⏱ ~5 giờ</span>
+ <span> 6 nguyên tắc cá nhân</span>
+ </div>
+ <p>Chính sách ĐHQGHN & Luật AI 2025. AI Disclosure statement. Phân tích 3 vấn đề đạo đức cốt lõi.</p>
+ <div class="card-tags">
+ <span class="card-tag">AI Ethics</span>
+ <span class="card-tag">Academic Integrity</span>
+ </div>
+ <div class="card-footer">
+ <span>Xem chi tiết</span>
+ <span class="arrow">→</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Conclusion Section -->
+ <section id="conclusion">
+ <div class="section-header animate-on-scroll">
+ <div class="section-tag">
+ 
+ <span>Tổng kết</span>
+ </div>
+ <h2 class="section-title">Phản tư & Bài học</h2>
+ <p class="section-desc">Những trải nghiệm và kỹ năng quan trọng nhất từ hành trình này</p>
+ </div>
+
+ <div class="conclusion-grid">
+ <div class="about-card animate-on-scroll">
+ 
+ <h3>Trải nghiệm & Thách thức</h3>
+ <p>Quá trình xây dựng Portfolio là hành trình nhận thức lại vai trò của bản thân trong kỷ nguyên AI. Thách thức lớn nhất là <strong>"productive struggle"</strong> — làm sao để AI hỗ trợ mà không tước đi cơ hội học sâu của não bộ.</p>
+ <p>Việc phải giải thích các khái niệm AI cho thành viên nhóm không chuyên đã dạy tôi kỹ năng <strong>đơn giản hóa vấn đề</strong> mà không làm mất đi bản chất kỹ thuật — một trong những bài học quý giá nhất.</p>
+ </div>
+ <div class="about-card animate-on-scroll">
+ 
+ <h3>Kỹ năng Tâm đắc</h3>
+ <ul>
+ <li><strong>Prompt Engineering</strong> — AI không phải "oracle" mà là "intern" cần hướng dẫn</li>
+ <li><strong>Fact-checking</strong> — Luôn kiểm chứng số liệu</li>
+ <li><strong>AI Disclosure</strong> — Lá chắn bảo vệ liêm chính</li>
+ </ul>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== MODALS ===== -->
+
+ <!-- Modal 1 -->
+ <div id="modal1" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal1')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 1 · Mục 1.4</span>
+ <h2>Thao tác cơ bản với Tệp tin & Thư mục</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Mục tiêu:</strong> Thực hành thành thạo 12 thao tác cơ bản với File Explorer trên Windows — từ tạo thư mục, đổi tên, sao chép, di chuyển, đến xóa và khôi phục tệp tin.</p>
+
+ <h3> Cấu trúc thư mục được thiết lập</h3>
+ <pre> <span class="folder">ThucHanh_DangKhoiNguyen</span>
+ <span class="folder">TaiLieu</span>
+ GhiChuQuanTrong.txt (bản sao từ Copy)
+ DiChuyen.txt (bản gốc từ Cut &amp; Paste)</pre>
+
+ <h3> 12 bước thực hành chi tiết</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>#</th><th>Thao tác</th><th>Cách thực hiện</th><th>Kết quả</th></tr></thead>
+ <tbody>
+ <tr><td>1</td><td><strong>Mở File Explorer</strong></td><td>Nhấn <code>Windows + E</code> hoặc nhấp icon thư mục màu vàng trên Taskbar</td><td>Cửa sổ File Explorer mở ra</td></tr>
+ <tr><td>2</td><td><strong>Truy cập ổ đĩa</strong></td><td>Nhấp <em>This PC</em> → nhấp đúp ổ D: hoặc E: (tránh ổ C: hệ thống)</td><td>Vào thư mục làm việc an toàn</td></tr>
+ <tr><td>3</td><td><strong>Tạo thư mục mới</strong></td><td>Chuột phải → <em>New</em> → <em>Folder</em> → đặt tên <code>ThucHanh_DangKhoiNguyen</code> → Enter</td><td>Thư mục mới xuất hiện</td></tr>
+ <tr><td>4</td><td><strong>Vào thư mục vừa tạo</strong></td><td>Nhấp đúp vào <code>ThucHanh_DangKhoiNguyen</code></td><td>Hiển thị nội dung bên trong (trống)</td></tr>
+ <tr><td>5</td><td><strong>Tạo tệp văn bản</strong></td><td>Chuột phải → <em>New</em> → <em>Text Document</em> → đặt tên <code>GhiChu.txt</code> → Enter</td><td>Tệp .txt trống được tạo</td></tr>
+ <tr><td>6</td><td><strong>Đổi tên tệp</strong></td><td>Chuột phải vào <code>GhiChu.txt</code> → <em>Rename</em> → đổi thành <code>GhiChuQuanTrong.txt</code> → Enter</td><td>Tên tệp thay đổi thành công</td></tr>
+ <tr><td>7</td><td><strong>Tạo thư mục con</strong></td><td>Chuột phải → <em>New</em> → <em>Folder</em> → đặt tên <code>TaiLieu</code></td><td>Thư mục con xuất hiện trong thư mục chính</td></tr>
+ <tr><td>8</td><td><strong>Sao chép tệp (Copy &amp; Paste)</strong></td><td>Chuột phải vào <code>GhiChuQuanTrong.txt</code> → <em>Copy</em> (<code>Ctrl+C</code>) → vào <code>TaiLieu</code> → <em>Paste</em> (<code>Ctrl+V</code>)</td><td>Bản sao xuất hiện trong TaiLieu; tệp gốc vẫn còn</td></tr>
+ <tr><td>9</td><td><strong>Di chuyển tệp (Cut &amp; Paste)</strong></td><td>Tạo <code>DiChuyen.txt</code> → Chuột phải → <em>Cut</em> (<code>Ctrl+X</code>) → vào <code>TaiLieu</code> → <em>Paste</em> (<code>Ctrl+V</code>)</td><td>Tệp gốc biến mất khỏi vị trí cũ, chỉ còn ở TaiLieu</td></tr>
+ <tr><td>10</td><td><strong>Xóa tệp thường</strong></td><td>Chuột phải vào <code>GhiChuQuanTrong.txt</code> → <em>Delete</em></td><td>Tệp chuyển vào Recycle Bin</td></tr>
+ <tr><td>11</td><td><strong>Xóa vĩnh viễn</strong></td><td>Chọn <code>DiChuyen.txt</code> → <code>Shift + Delete</code> → xác nhận Yes</td><td>Tệp bị xóa hoàn toàn, không qua Recycle Bin</td></tr>
+ <tr><td>12</td><td><strong>Khôi phục từ Recycle Bin</strong></td><td>Mở Recycle Bin trên Desktop → tìm <code>GhiChuQuanTrong.txt</code> → Chuột phải → <em>Restore</em></td><td>Tệp trở về vị trí ban đầu</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3>⌨ Bảng phím tắt quan trọng</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Thao tác</th><th>Phím tắt</th><th>Lưu ý</th></tr></thead>
+ <tbody>
+ <tr><td>Sao chép</td><td><code>Ctrl + C</code> → <code>Ctrl + V</code></td><td>Giữ nguyên bản gốc tại vị trí cũ</td></tr>
+ <tr><td>Di chuyển</td><td><code>Ctrl + X</code> → <code>Ctrl + V</code></td><td>Xóa khỏi vị trí cũ, chỉ còn ở vị trí mới</td></tr>
+ <tr><td>Xóa vào Recycle Bin</td><td><code>Delete</code></td><td>Có thể khôi phục được</td></tr>
+ <tr><td>Xóa vĩnh viễn</td><td><code>Shift + Delete</code></td><td>Mất hoàn toàn, không khôi phục được</td></tr>
+ <tr><td>Đổi tên</td><td><code>F2</code></td><td>Nhanh hơn chuột phải → Rename</td></tr>
+ <tr><td>Mở File Explorer</td><td><code>Windows + E</code></td><td>Truy cập nhanh từ bất kỳ đâu</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Quy tắc đặt tên tệp (Naming Convention)</h3>
+ <ul>
+ <li><strong>Cấu trúc chuẩn:</strong> <code>[YYYYMMDD]_[MonHoc]_[TenBaiTap]_v[N].[ext]</code></li>
+ <li><strong>Ví dụ:</strong> <code>20260330_VNU1001_BaiTap3_Prompt_v2.pdf</code></li>
+ <li><strong>Không dùng:</strong> khoảng trắng, dấu tiếng Việt, ký tự đặc biệt như <code>/ \ : * ? " &lt; &gt; |</code></li>
+ <li><strong>Thay thế khoảng trắng:</strong> dấu gạch dưới <code>_</code> để tương thích đa nền tảng (Windows, macOS, Linux)</li>
+ <li><strong>Luôn kèm version:</strong> <code>_v1</code>, <code>_v2</code>... để tracking lịch sử chỉnh sửa</li>
+ </ul>
+
+ <h3> Kết quả đạt được</h3>
+ <blockquote>Nắm vững toàn bộ quy trình quản lý tệp tin trên Windows. Hiểu rõ sự khác biệt then chốt: <strong>Copy</strong> giữ bản gốc, <strong>Cut</strong> xóa bản gốc, <strong>Delete</strong> có thể khôi phục, <strong>Shift+Delete</strong> mất vĩnh viễn. Thiết lập được hệ thống thư mục có cấu trúc rõ ràng phục vụ học tập.</blockquote>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal 2 -->
+ <div id="modal2" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal2')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 2 · Mục 2.4</span>
+ <h2>Tìm kiếm & Đánh giá Thông tin Học thuật</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Chủ đề nghiên cứu:</strong> Ứng dụng của Machine Learning (Deep Learning) trong Chẩn đoán Hình ảnh Y tế — tập trung vào CNN, U-Net, XAI, Active Learning, Uncertainty Estimation.</p>
+
+ <h3> Quy trình tìm kiếm</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Loại nguồn</th><th>Cơ sở dữ liệu / Nơi tìm</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Cơ sở dữ liệu học thuật</strong></td><td>Google Scholar, PubMed / PMC, ScienceDirect, SpringerLink, IEEE Xplore</td></tr>
+ <tr><td><strong>Tạp chí khoa học</strong></td><td>Medical Image Analysis (Elsevier), npj Digital Medicine (Springer Nature), Comput. Math. Methods in Medicine (Hindawi)</td></tr>
+ <tr><td><strong>Sách học thuật</strong></td><td>Elsevier Academic Press, Routledge (Taylor &amp; Francis)</td></tr>
+ <tr><td><strong>Nguồn mở</strong></td><td>arXiv.org (preprint), PMC (peer-reviewed open access)</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Từ khóa tìm kiếm (Search Strings)</h3>
+ <ul>
+ <li><code>"deep learning medical image analysis review"</code></li>
+ <li><code>"fairness in medical image analysis"</code></li>
+ <li><code>"active learning medical imaging survey"</code></li>
+ <li><code>"XAI medical image classification"</code></li>
+ <li><code>"machine learning medical imaging book"</code></li>
+ <li><code>"uncertainty estimation deep learning medical"</code></li>
+ </ul>
+
+ <h3> Bảng đánh giá 10 nguồn tin</h3>
+ <div class="table-responsive">
+ <table>
+ <thead>
+ <tr><th>#</th><th>Tác giả & Năm</th><th>Loại / Nơi xuất bản</th><th>Điểm nổi bật</th><th>Xếp hạng</th></tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>1</td>
+ <td><strong>Xu, Z. et al. (2024)</strong><br><em>Addressing fairness issues in deep learning-based medical image analysis</em></td>
+ <td>Bài báo<br>npj Digital Medicine (Springer Nature)</td>
+ <td>Systematic review PRISMA, 4 database, 63 nghiên cứu. Trích dẫn: 42. Chi tiết fairness metrics &amp; mitigation. Tác giả: USTC &amp; CAS (uy tín cao).</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>2</td>
+ <td><strong>Sistaninejhad, B. et al. (2023)</strong><br><em>A Review Paper about Deep Learning for Medical Image Analysis</em></td>
+ <td>Bài báo<br>Comput. Math. Methods in Medicine (Hindawi)</td>
+ <td>Survey CNN, pretrained models, GANs. Bảng so sánh performance rõ ràng. Cập nhật: 05/2023.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>3</td>
+ <td><strong>Wang, H. et al. (2024)</strong><br><em>A comprehensive survey on deep active learning in medical image analysis</em></td>
+ <td>Bài báo<br>Medical Image Analysis (Elsevier)</td>
+ <td>Taxonomy DAL + semi/self-supervised. Code GitHub công khai. Review 164 works. Trích dẫn: 74. Tác giả: Đại học Fudan.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>4</td>
+ <td><strong>Chen, J. et al. (2025)</strong><br><em>A survey on deep learning in medical image registration</em></td>
+ <td>Bài báo<br>Medical Image Analysis (Elsevier)</td>
+ <td>Survey network architecture, loss functions, uncertainty estimation. Tác giả: Johns Hopkins University. Epub 2024.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>5</td>
+ <td><strong>Litjens, G. et al. (2017)</strong><br><em>A survey on deep learning in medical image analysis</em></td>
+ <td>Bài báo<br>Medical Image Analysis (Elsevier)</td>
+ <td>Kinh điển nền tảng, review &gt;300 công trình CNN. Trích dẫn: hàng nghìn. Nhược: cũ so với công nghệ 2024.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>6</td>
+ <td><strong>Zhou, S.K., Greenspan, H. &amp; Shen, D. (Eds.) (2023)</strong><br><em>Deep Learning for Medical Image Analysis (2nd Ed.)</em></td>
+ <td>Sách<br>Elsevier Academic Press</td>
+ <td>Textbook chuẩn MICCAI. Tổng hợp kiến trúc DL + case study thực tế. Bao quát rộng, có thể dùng làm tài liệu tham khảo chính.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>7</td>
+ <td><strong>Soufiene, B. &amp; Chakraborty, S. (2023)</strong><br><em>Machine Learning and Deep Learning Techniques for Medical Image Recognition</em></td>
+ <td>Sách<br>Routledge (Taylor &amp; Francis)</td>
+ <td>Hướng dẫn thực hành ML/DL cho recognition. Ít experimental mới, phù hợp cho người mới bắt đầu.</td>
+ <td> Cao</td>
+ </tr>
+ <tr>
+ <td>8</td>
+ <td><strong>Patricio, C. et al. (2022)</strong><br><em>Explainable Deep Learning Methods in Medical Image Classification: A Survey</em></td>
+ <td>Nguồn mở<br>arXiv.org (Preprint)</td>
+ <td>Chi tiết XAI (visual/textual/concept-based). Tác giả: Đại học Porto (uy tín). Chưa peer-review chính thức.</td>
+ <td> Trung bình</td>
+ </tr>
+ <tr>
+ <td>9</td>
+ <td><strong>(2024)</strong><br><em>Self-eXplainable AI for Medical Image Analysis: A Survey and New Outlooks</em></td>
+ <td>Nguồn mở<br>arXiv.org (Preprint)</td>
+ <td>Cập nhật nhất về self-explainable AI trên nhiều modality. Nhóm nghiên cứu quốc tế. Còn là preprint.</td>
+ <td> Trung bình</td>
+ </tr>
+ <tr>
+ <td>10</td>
+ <td><strong>(2023)</strong><br><em>A Framework for Interpretability in Machine Learning for Medical Imaging</em></td>
+ <td>Nguồn mở<br>arXiv.org (Preprint)</td>
+ <td>Framework interpretability cụ thể cho MedIA. Nhóm MLMI. Thực tiễn tốt, còn là preprint.</td>
+ <td> Trung bình</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Nhận xét tổng hợp</h3>
+ <blockquote><strong>7/10 nguồn đạt độ tin cậy Cao</strong> — được xuất bản trên tạp chí peer-reviewed uy tín (Elsevier, Springer Nature, Hindawi) hoặc sách học thuật lớn. <strong>3/10 nguồn Trung bình</strong> — là preprint trên arXiv, có giá trị tham khảo về xu hướng mới nhất nhưng cần xác minh thêm. Bài học: số lượng trích dẫn và nhà xuất bản là chỉ số quan trọng để đánh giá độ tin cậy.</blockquote>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal 3 -->
+ <div id="modal3" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal3')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 3 · Mục 3.4</span>
+ <h2>Phát triển Kỹ năng Viết Prompt Hiệu quả cho LLM</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Mục tiêu:</strong> Phát triển kỹ năng viết prompt hiệu quả nhằm tận dụng tối đa khả năng của các mô hình ngôn ngữ lớn (LLM) trong hỗ trợ học tập.</p>
+ <p><strong>Phương pháp:</strong> Thử nghiệm tiến hóa Prompt theo 3 cấp độ — <strong>Cơ bản → Cải tiến → Nâng cao</strong> — cho 3 tác vụ học tập khác nhau.</p>
+
+ <h3> Tác vụ 1: Tóm tắt tài liệu học thuật</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Cấp độ</th><th>Prompt</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Cơ bản</strong></td><td><em>"Summarize the following text: [dán văn bản]"</em></td></tr>
+ <tr><td><strong>Cải tiến</strong></td><td><em>"Provide a concise summary of the following academic text. Focus on main ideas, benefits, challenges and conclusions. Limit to 150-200 words. [dán văn bản]"</em></td></tr>
+ <tr><td><strong>Nâng cao</strong></td><td><em>"You are a professional academic summarizer with expertise in educational psychology. Apply Chain-of-Thought: first identify the text structure, then extract key arguments, then synthesize. Provide: (1) Main thesis in 1 sentence, (2) 3 key points as bullets, (3) Critical evaluation in 50 words. Limit total to 200 words. Use academic tone. [dán văn bản]"</em></td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Tác vụ 2: Giải thích khái niệm phức tạp (Quantum Entanglement)</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Cấp độ</th><th>Prompt</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Cơ bản</strong></td><td><em>"Explain what quantum entanglement is."</em></td></tr>
+ <tr><td><strong>Cải tiến</strong></td><td><em>"Explain the concept of quantum entanglement in simple terms that a high school student can understand. Use a real-world analogy and limit to 150 words."</em></td></tr>
+ <tr><td><strong>Nâng cao</strong></td><td><em>"You are a renowned physics professor who specializes in making complex concepts accessible. Explain quantum entanglement by: (1) Starting with a counterintuitive everyday analogy, (2) Defining the concept precisely, (3) Explaining why it challenges classical physics, (4) Correcting one common misconception. Include a 'Key Takeaway' box at the end. Audience: first-year university students."</em></td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Tác vụ 3: Tạo câu hỏi ôn tập (The Industrial Revolution)</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Cấp độ</th><th>Prompt</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Cơ bản</strong></td><td><em>"Create 10 review questions on the topic of the Industrial Revolution."</em></td></tr>
+ <tr><td><strong>Cải tiến</strong></td><td><em>"Create 15 review questions about the Industrial Revolution. Include MCQ (5), short answer (5), and essay questions (5). Vary difficulty levels."</em></td></tr>
+ <tr><td><strong>Nâng cao</strong></td><td><em>"You are an expert history educator designing a comprehensive assessment. Using Bloom's Taxonomy, create 15 questions: Remember (3), Understand (3), Apply (3), Analyze (3), Evaluate (2), Create (1). For each question: provide a model answer and grading rubric (10 points). Focus on causes, consequences, and global impact of the Industrial Revolution."</em></td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Bảng so sánh kết quả 3 cấp độ Prompt</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Tác vụ</th><th>Phiên bản</th><th>Độ cấu trúc</th><th>Độ sâu & Logic</th><th>Tính hữu ích</th></tr></thead>
+ <tbody>
+ <tr><td rowspan="3"><strong>Tóm tắt tài liệu</strong></td><td>Cơ bản</td><td>Thấp</td><td>Thấp</td><td>Trung bình</td></tr>
+ <tr><td>Cải tiến</td><td>Trung bình</td><td>Tốt</td><td>Cao</td></tr>
+ <tr><td>Nâng cao</td><td>Cao</td><td>Rất cao</td><td>Xuất sắc</td></tr>
+ <tr><td><strong>Giải thích KN</strong></td><td>Nâng cao</td><td>Cao</td><td>Rất cao</td><td>Xuất sắc — Analog + sửa misconception</td></tr>
+ <tr><td><strong>Câu hỏi ôn tập</strong></td><td>Nâng cao</td><td>Cao</td><td>Rất cao</td><td>Xuất sắc — Bloom's taxonomy đầy đủ</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> 8 Nguyên tắc Viết Prompt Cốt lõi</h3>
+ <div class="principles-grid">
+ <div class="principle-card"><h4>1. Càng cụ thể càng tốt</h4><p>Tránh lệnh mơ hồ. Cung cấp giới hạn từ vựng, độ dài, định dạng cụ thể.</p></div>
+ <div class="principle-card"><h4>2. Role-prompting</h4><p>Gán vai trò cho AI: <em>"You are an expert history educator..."</em> Cải thiện tone và depth đáng kể.</p></div>
+ <div class="principle-card"><h4>3. Chain-of-Thought (CoT)</h4><p>Yêu cầu AI "Think step-by-step" hoặc liệt kê các bước rõ ràng để giảm lỗi logic.</p></div>
+ <div class="principle-card"><h4>4. Few-shot examples</h4><p>Cung cấp 1–2 ví dụ mẫu về input/output mong muốn trước khi đưa task chính.</p></div>
+ <div class="principle-card"><h4>5. Định dạng Output rõ ràng</h4><p>Chỉ định Markdown, Table, JSON, Bullet list, hay đánh số. AI sẽ theo sát hơn nhiều.</p></div>
+ <div class="principle-card"><h4>6. Đầy đủ Context</h4><p>Cung cấp nền tảng kiến thức, đối tượng mục tiêu và mục đích sử dụng của output.</p></div>
+ <div class="principle-card"><h4>7. Kết hợp kỹ thuật</h4><p>Role + CoT + Few-shot kết hợp tạo ra kết quả xuất sắc hơn từng kỹ thuật riêng lẻ.</p></div>
+ <div class="principle-card"><h4>8. Iterative Refinement</h4><p>Liên tục tinh chỉnh prompt dựa trên output của lần trước. Không kỳ vọng hoàn hảo ngay lần đầu.</p></div>
+ </div>
+
+ <h3> Bài học rút ra</h3>
+ <blockquote>Prompt nâng cao vượt trội nhờ <strong>Role + CoT + Few-shot</strong>. Kỹ thuật này giúp LLM suy nghĩ có hệ thống, giảm lỗi và tạo output chuyên nghiệp. Điều quan trọng nhất: <strong>AI không phải "oracle" mà là "intern" cần hướng dẫn rõ ràng</strong> — càng mô tả cụ thể, kết quả càng tốt.</blockquote>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal 4 -->
+ <div id="modal4" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal4')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 4 · Mục 4.4</span>
+ <h2>Hợp tác Trực tuyến: Dự án AI & Viễn thông</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Dự án:</strong> "Tổng hợp tài liệu: Ứng dụng AI trong xử lý tín hiệu viễn thông"</p>
+ <p><strong>Nhóm:</strong> 3 người — 1 sinh viên AI (Đặng Khôi Nguyên) + 2 sinh viên Điện tử Viễn thông</p>
+ <p><strong>Thời gian:</strong> 7 ngày (16/05/2026 – 23/05/2026)</p>
+ <p><strong>Vai trò cá nhân:</strong> Thiết lập Google Docs template · Tác giả Phần 2 (CNN, LSTM, Reinforcement Learning) · Reviewer Phần 1 &amp; 3 · Hỗ trợ kỹ thuật cho nhóm</p>
+
+ <h3> Kế hoạch 7 ngày chi tiết</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Ngày</th><th>Nội dung</th><th>Đặng Khôi Nguyên</th><th>Nguyễn Minh Đức</th><th>Phạm Ngọc Đông</th></tr></thead>
+ <tbody>
+ <tr><td><strong>1</strong></td><td>Khởi động &amp; Thiết lập</td><td>Tạo Google Docs template (Heading styles, Mục lục tự động); chia sẻ quyền Editor</td><td>Tạo Trello board, Drive folder cấu trúc; chủ trì Discord call họp lần 1 (~40 phút)</td><td>Join các công cụ theo hướng dẫn; làm quen Trello và Google Docs</td></tr>
+ <tr><td><strong>2</strong></td><td>Research tài liệu</td><td>Tìm tài liệu CNN, LSTM, RL xử lý tín hiệu; upload vào <code>/01_TaiLieuThamKhao/</code></td><td>Tìm tài liệu về kiến trúc 5G, giao thức IoT; upload Drive</td><td>Tìm bài báo, bài viết ứng dụng AI viễn thông thực tế</td></tr>
+ <tr><td><strong>3</strong></td><td>Viết nội dung</td><td>Viết Phần 2: nguyên lý CNN/LSTM/RL, ưu nhược điểm, so sánh, vẽ sơ đồ kiến trúc CNN</td><td>Viết Phần 1: tổng quan tín hiệu viễn thông và thách thức</td><td>Viết Phần 3: ứng dụng thực tiễn trong 5G và IoT</td></tr>
+ <tr><td><strong>4</strong></td><td>Review chéo</td><td>Đọc Phần 1 &amp; 3, để lại comment và suggestions (Suggesting mode). Comment chi tiết về thuật ngữ AI trong Phần 3</td><td>Đọc Phần 2 &amp; 3, để lại comment trên Google Docs</td><td>Đọc Phần 1 &amp; 2, ghi chú chỗ chưa hiểu để hỏi qua Discord</td></tr>
+ <tr><td><strong>5</strong></td><td>Tổng hợp &amp; Call lần 2</td><td>Viết Kết luận; xác nhận nội dung sau call (~45 phút); điều chỉnh Phần 2 cho dễ hiểu hơn với người không chuyên</td><td>Chỉnh format tài liệu, thêm sơ đồ; chủ trì call Discord lần 2</td><td>Chỉnh sửa Phần 3 theo góp ý; điều chỉnh giọng văn cho chặt chẽ hơn</td></tr>
+ <tr><td><strong>6</strong></td><td>Hoàn thiện</td><td>Đọc lại bản cuối, xác nhận không còn lỗi nội dung; kiểm tra Version History</td><td>Kiểm tra cấu trúc Drive, upload bản hoàn chỉnh vào <code>/04_BanHoanChinh/</code></td><td>Upload ảnh và tài liệu cá nhân vào đúng thư mục</td></tr>
+ <tr><td><strong>7</strong></td><td>Nộp bài</td><td>Viết báo cáo cá nhân</td><td>Viết báo cáo cá nhân, tổng hợp ảnh minh chứng</td><td>Viết báo cáo cá nhân</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Phân tích 4 Công cụ đã sử dụng</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Công cụ</th><th>Cách sử dụng</th><th>Tính năng nổi bật</th><th>Hạn chế</th></tr></thead>
+ <tbody>
+ <tr>
+ <td><strong>Trello</strong></td>
+ <td>Labels 3 màu theo thành viên. 7 card cá nhân, cập nhật 3 lần/ngày</td>
+ <td>Checklist cho các bước nhỏ của Phần 2: nghiên cứu → viết → so sánh → vẽ sơ đồ. Nhìn board là biết ai đang làm gì</td>
+ <td>Không có thông báo tự động khi card thay đổi</td>
+ </tr>
+ <tr>
+ <td><strong>Google Docs</strong></td>
+ <td>Tạo file <code>[Nhom3]_TaiLieuTongHop_v1.0</code> với Heading styles + Mục lục tự động</td>
+ <td>Suggesting mode (chỉnh sửa không phá nội dung gốc). Version History — lưới an toàn khi 3 người cùng edit</td>
+ <td>Không hỗ trợ ký hiệu toán phức tạp tốt như LaTeX</td>
+ </tr>
+ <tr>
+ <td><strong>Google Drive</strong></td>
+ <td>4 thư mục: <code>/01_TaiLieuThamKhao/</code>, <code>/02_BanNhap/</code>, <code>/03_HinhAnh_SoDo/</code>, <code>/04_BanHoanChinh/</code></td>
+ <td>Quy tắc đặt tên chuẩn giúp phân biệt file của ai, liên quan phần nào. Cuối tuần có ~15 file từ 3 nguồn</td>
+ <td>Không có thông báo khi file mới được upload</td>
+ </tr>
+ <tr>
+ <td><strong>Discord</strong></td>
+ <td>3 kênh: #general, #resources, #review. ~25–30 lượt nhắn tin trong 7 ngày</td>
+ <td>Kênh async phù hợp 3 lịch bận khác nhau. #review tạo ra thảo luận 3 chiều kỹ thuật thú vị</td>
+ <td>Không tích hợp tự động với Trello/Docs</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Thách thức & Cách giải quyết</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Thách thức</th><th>Cách giải quyết</th><th>Bài học</th></tr></thead>
+ <tbody>
+ <tr>
+ <td><strong>Lệch pha kiến thức:</strong> Phần 2 nhiều toán và thuật ngữ AI, 2 bạn ĐTVT khó hiểu</td>
+ <td>Viết phiên bản đầy đủ trước, sau đó thêm "Tóm tắt ý chính bằng lời văn" cuối mỗi thuật toán; thay ký hiệu toán bằng mô tả khi không cần thiết</td>
+ <td>Kỹ năng viết cho đa đối tượng — quan trọng hơn tưởng</td>
+ </tr>
+ <tr>
+ <td><strong>Kỹ năng số không đều:</strong> Bạn thứ 3 chưa quen Heading styles và Reply comment</td>
+ <td>Nhắn hướng dẫn ngắn qua Discord kèm ảnh chụp màn hình từng bước. Từ ngày 4 bạn đã tự dùng đúng, không cần nhắc thêm</td>
+ <td>Hỗ trợ không gây áp lực, dùng hình ảnh trực quan</td>
+ </tr>
+ <tr>
+ <td><strong>Giọng văn rời rạc:</strong> 3 người, 3 phong cách viết khác nhau</td>
+ <td>Call Discord lần 2 đọc lại từng transition. Biên tập chỗ chuyển tiếp giữa Phần 1–2, điều chỉnh Phần 3 cho chặt chẽ hơn</td>
+ <td>Review tổng thể trước khi nộp là bước không thể bỏ</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Kết quả &amp; Sản phẩm</h3>
+ <blockquote>Tài liệu tổng hợp 3 phần hoàn chỉnh: (1) Tổng quan tín hiệu viễn thông; (2) Các phương pháp AI — CNN nhận dạng điều chế, LSTM dự đoán chất lượng đường truyền, RL tối ưu băng thông; (3) Ứng dụng trong 5G và IoT. Tôi đã học được điều mà nhóm đôi không có: <strong>kỹ năng viết cho nhiều đối tượng khác nhau trong cùng một tài liệu</strong>.</blockquote>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal 5 -->
+ <div id="modal5" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal5')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 5 · Mục 5.4</span>
+ <h2>Sáng tạo Nội dung Số với AI Tạo sinh</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Sản phẩm:</strong> Bài viết blog tiếng Việt — <em>"Trí tuệ nhân tạo đang thay đổi cuộc sống chúng ta như thế nào?"</em></p>
+ <p><strong>Đối tượng:</strong> Độc giả phổ thông (không chuyên kỹ thuật), hướng tới 5 lĩnh vực: Giáo dục, Y tế, Giao thông, Nghệ thuật, Tài chính.</p>
+ <p><strong>Bộ công cụ:</strong> Claude (văn bản) · DALL-E 3 (hình ảnh) · Canva AI (thiết kế)</p>
+
+ <h3> Công cụ 1 — Claude (Anthropic): AI Tạo Văn Bản</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Prompt</th><th>Kết quả &amp; Chỉnh sửa</th></tr></thead>
+ <tbody>
+ <tr>
+ <td><strong>Lên ý tưởng:</strong><br><em>"Tôi muốn viết một bài blog tiếng Việt về tác động của AI đến cuộc sống hàng ngày, dành cho độc giả phổ thông. Hãy gợi ý 5 góc tiếp cận thú vị."</em></td>
+ <td>Claude đề xuất 5 góc: AI trong GD cá nhân hóa, hỗ trợ y tế, sáng tạo nghệ thuật, giao thông thông minh, đạo đức AI. Chọn kết hợp cả 5 để tạo bài tổng quan.</td>
+ </tr>
+ <tr>
+ <td><strong>Viết nội dung:</strong><br><em>"Viết phần giới thiệu (~200 từ) với giọng văn thân thiện, dễ hiểu. Kết thúc bằng câu hỏi gợi mở."</em></td>
+ <td>Output ban đầu hơi trang trọng. Đã Việt hóa bằng cách thêm ví dụ gần gũi: ứng dụng đặt xe, chatbot ngân hàng, trợ lý ảo trên điện thoại. Đóng góp cá nhân: ~40% bài viết cuối.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Công cụ 2 — DALL-E 3 (OpenAI): AI Tạo Hình Ảnh</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Mục đích</th><th>Prompt sử dụng</th><th>Kết quả</th></tr></thead>
+ <tbody>
+ <tr>
+ <td>Hình ảnh Banner</td>
+ <td><em>"A futuristic illustration of AI integrated into everyday Vietnamese life — a person using a smartphone with AI assistants, holographic displays, in a warm modern home. Flat design, blue and purple color palette, no text."</em></td>
+ <td>Lần 1: Quá thiên phong cách phương Tây. Lần 2 thêm <em>"Southeast Asian aesthetic, Vietnamese urban environment"</em> → đạt yêu cầu. Crop và điều chỉnh độ sáng trong Canva.</td>
+ </tr>
+ <tr>
+ <td>Minh họa Y tế</td>
+ <td><em>"A clean, minimal illustration of a doctor using an AI diagnostic tablet, warm clinical environment, teal and white color scheme, professional medical setting."</em></td>
+ <td>Đạt chất lượng tốt ngay lần đầu. Chỉ cần crop lại tỷ lệ và chỉnh sáng nhẹ trong Canva trước khi tích hợp vào bài.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> Công cụ 3 — Canva AI: AI Hỗ trợ Thiết kế</h3>
+ <ul>
+ <li><strong>Magic Design:</strong> Nhập tiêu đề + chủ đề → hệ thống gợi ý 8 mẫu. Chọn "Modern Tech" màu xanh navy + trắng — nhất quán với hình ảnh DALL-E 3.</li>
+ <li><strong>Text to Graphic (Magic Media):</strong> Prompt <em>"Infographic về 5 lĩnh vực AI tác động: Education, Healthcare, Transportation, Arts, Finance — minimalist icons, consistent style"</em> → bộ icon SVG gọn, dùng làm điểm nhấn trực quan.</li>
+ <li><strong>Đóng góp cá nhân:</strong> Tự điều chỉnh khoảng cách, chọn font, sắp xếp lại thứ tự các khối nội dung theo logic trình bày riêng.</li>
+ </ul>
+
+ <h3> So sánh toàn diện 3 Công cụ AI</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Tiêu chí</th><th>Claude (Văn bản)</th><th>DALL-E 3 (Hình ảnh)</th><th>Canva AI (Thiết kế)</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Điểm mạnh nổi bật</strong></td><td>Mạch lạc, hiểu ngữ cảnh, hỗ trợ tiếng Việt xuất sắc</td><td>Chất lượng hình ảnh cao, sáng tạo, đa dạng phong cách</td><td>Giao diện thân thiện, template đẹp, phù hợp người không chuyên</td></tr>
+ <tr><td><strong>Hạn chế chính</strong></td><td>Ví dụ thiếu tính địa phương nếu không nhắc rõ</td><td>Cần prompt tiếng Anh chính xác; cần 2–3 lần thử</td><td>AI gợi ý còn chung chung; thiếu tùy biến sâu</td></tr>
+ <tr><td><strong>Tốc độ phản hồi</strong></td><td>Nhanh (~5 giây/đoạn)</td><td>Trung bình (~20–30 giây/ảnh)</td><td>Nhanh, giao diện kéo thả trực quan</td></tr>
+ <tr><td><strong>Độ chính xác theo yêu cầu</strong></td><td>Cao nếu prompt rõ ràng</td><td>Trung bình — cần iteration</td><td>Cao với layout; thấp hơn với AI content tự động</td></tr>
+ <tr><td><strong>Hỗ trợ tiếng Việt</strong></td><td>Xuất sắc — hiểu văn hóa VN</td><td>Cơ bản — phải dùng tiếng Anh</td><td>Khá tốt — có giao diện tiếng Việt</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> AI đã thay đổi quy trình sáng tạo như thế nào?</h3>
+ <blockquote><strong>Trước khi dùng AI:</strong> Quy trình tuyến tính — nghiên cứu → dàn ý → viết nháp → chỉnh sửa → tìm hình → thiết kế. Tổng thời gian: ~8–10 giờ.<br><br><strong>Sau khi tích hợp AI:</strong> Quy trình phi tuyến tính — AI tạo nhiều lựa chọn song song, người sáng tạo đóng vai trò <strong>Curator</strong> (tuyển chọn, tinh chỉnh) thay vì <strong>Producer</strong> (tạo từ đầu). Thời gian rút xuống còn ~3–4 giờ, nhưng đòi hỏi tư duy phê phán cao hơn để đánh giá output.</blockquote>
+
+ <h3> Vấn đề đạo đức cần lưu ý</h3>
+ <ul>
+ <li><strong>Hallucination:</strong> Claude đưa ra số liệu thống kê không có nguồn rõ ràng trong một lần thử → phải fact-check toàn bộ số liệu trước khi đăng.</li>
+ <li><strong>Bản quyền hình ảnh:</strong> Vùng xám pháp lý — hình ảnh DALL-E tạo ra từ dữ liệu huấn luyện có thể ảnh hưởng bản quyền.</li>
+ <li><strong>Thiếu cá tính:</strong> Nội dung AI "sạch" đến mức vô vị — cần thêm trải nghiệm cá nhân và quan điểm độc đáo của tác giả.</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal 6 -->
+ <div id="modal6" class="modal">
+ <div class="modal-content">
+ <span class="close-btn" onclick="closeModal('modal6')">&#x2715;</span>
+ <div class="modal-header">
+ <span class="modal-tag"> Bài tập 6 · Mục 6.4</span>
+ <h2>Sử dụng AI có Trách nhiệm trong Học thuật</h2>
+ </div>
+ <div class="modal-body">
+ <p><strong>Bối cảnh pháp lý:</strong> Luật Trí tuệ nhân tạo 2025 (số 134/2025/QH15, hiệu lực từ 01/3/2026) và dự thảo Thông tư Bộ GD&amp;ĐT 2025 về ứng dụng công nghệ trong giáo dục đại học.</p>
+
+ <h3> Chính sách ĐHQGHN về AI</h3>
+ <ul>
+ <li>Từ năm học 2025–2026: toàn bộ SV chính quy bắt buộc học học phần <strong>VNU1001</strong> (3 tín chỉ, trực tuyến toàn phần) — bao gồm kỹ năng AI và đạo đức học thuật.</li>
+ <li>Dự thảo Thông tư 2025: AI chỉ là công cụ hỗ trợ, không thay thế giảng viên. Sử dụng phải minh bạch.</li>
+ <li><strong>Vi phạm bị cấm:</strong> Dùng AI gian lận, không khai báo khi dùng AI, đạo văn từ output AI.</li>
+ <li><strong>Luật AI 2025:</strong> Nghiêm cấm dùng AI để lừa đảo, tạo thông tin sai lệch, xâm phạm quyền riêng tư.</li>
+ </ul>
+
+ <h3> Nhiệm vụ minh họa: Thuyết trình về AI & Thị trường Lao động VN</h3>
+ <p><em>Chuẩn bị bài thuyết trình 10 phút, 8–10 slide về "Tác động của AI đến thị trường lao động Việt Nam"</em></p>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Prompt gửi Claude</th><th>Đầu ra AI</th><th>Chỉnh sửa cá nhân</th></tr></thead>
+ <tbody>
+ <tr>
+ <td><em>"Gợi ý cấu trúc 8–10 slide thuyết trình về tác động của AI đến thị trường lao động VN, cho SV đại học, 10 phút."</em></td>
+ <td>9 slide: mở bằng câu hỏi kích thích → AI toàn cầu → thực trạng lao động VN → công việc bị ảnh hưởng → cơ hội mới → kỹ năng cần thiết → giải pháp → kết luận</td>
+ <td>Bổ sung slide về chính sách ứng phó của Chính phủ VN và làn sóng FDI công nghệ — nội dung AI chưa phản ánh đặc thù VN</td>
+ </tr>
+ <tr>
+ <td><em>"Viết bullet points cho slide 'Công việc có nguy cơ tự động hóa ở VN', mỗi điểm tối đa 12 chữ, kèm 2 số liệu từ nghiên cứu uy tín."</em></td>
+ <td>Danh sách: dệt may, kế toán cơ bản, nhập liệu, lắp ráp; kèm số liệu McKinsey Global Institute về tỷ lệ tự động hóa Đông Nam Á</td>
+ <td>Kiểm chứng lại qua báo cáo ILO 2023 về ASEAN; điều chỉnh cho phù hợp bối cảnh trong nước thay vì số liệu toàn cầu</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> AI Disclosure Statement (Tuyên bố Minh bạch AI)</h3>
+ <blockquote>"Bài thuyết trình này sử dụng <strong>Claude (Anthropic, phiên bản Sonnet 4.6)</strong> để hỗ trợ: (1) gợi ý cấu trúc slide ban đầu, (2) soạn thảo bullet points cho một số slide. Toàn bộ đầu ra đã được kiểm tra, chỉnh sửa và bổ sung số liệu từ nguồn gốc (ILO 2023, McKinsey). Người thực hiện chịu hoàn toàn trách nhiệm về nội dung cuối cùng."</blockquote>
+
+ <h3> Phân tích 3 Vấn đề Đạo đức Cốt lõi</h3>
+ <div class="table-responsive">
+ <table>
+ <thead><tr><th>Vấn đề</th><th>Phân tích</th><th>Giải pháp thực tế</th></tr></thead>
+ <tbody>
+ <tr>
+ <td><strong>Ranh giới hỗ trợ hợp lý vs gian lận</strong></td>
+ <td>Dùng AI brainstorm, kiểm tra chính tả, tóm tắt = hợp lý. Nộp thẳng output AI, dùng AI viết toàn bộ bài luận = vi phạm. Vấn đề cốt lõi: nếu AI làm thay, người học không học được gì.</td>
+ <td>Luôn tự phác thảo ý tưởng trước. Xem AI như "intern" cần hướng dẫn, không phải "oracle" cho sẵn đáp án.</td>
+ </tr>
+ <tr>
+ <td><strong>Quyền sở hữu trí tuệ &amp; Trích dẫn</strong></td>
+ <td>AI không phải tác giả theo pháp luật VN hiện hành. Dữ liệu huấn luyện AI lấy từ hàng triệu tác phẩm không trích nguồn → vùng xám pháp lý về bản quyền.</td>
+ <td>Trích dẫn AI theo APA 7. Công bố minh bạch mức độ hỗ trợ trong mọi bài nộp.</td>
+ </tr>
+ <tr>
+ <td><strong>Tác động đến phát triển kỹ năng</strong></td>
+ <td>"Productive struggle" — giai đoạn vật lộn với vấn đề khó là lúc não học sâu nhất. AI làm thay bỏ qua giai đoạn nhận thức quan trọng này. Nghịch lý: bài tốt hơn ngắn hạn, nhưng kém năng lực dài hạn.</td>
+ <td>Tự giải quyết vấn đề trước khi hỏi AI. Dùng AI để kiểm tra và mở rộng, không phải để thay thế quá trình tư duy.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <h3> 6 Nguyên tắc Sử dụng AI Cá nhân</h3>
+ <div class="principles-grid">
+ <div class="principle-card"><h4>1. Tư duy trước, AI sau</h4><p>Tự xây dựng ý tưởng ban đầu trước khi hỏi AI. AI là bước mở rộng, không phải điểm xuất phát.</p></div>
+ <div class="principle-card"><h4>2. Xác minh mọi thông tin</h4><p>Không tin tuyệt đối vào AI. Luôn cross-check số liệu và trích dẫn với nguồn gốc trước khi sử dụng.</p></div>
+ <div class="principle-card"><h4>3. Khai báo minh bạch</h4><p>Công bố tên công cụ, nội dung và mức độ hỗ trợ AI — ngay cả khi không bị yêu cầu.</p></div>
+ <div class="principle-card"><h4>4. Giữ tiếng nói cá nhân</h4><p>Đảm bảo bài nộp phản ánh phân tích và giọng văn của chính mình. AI không xóa mờ cá tính học thuật.</p></div>
+ <div class="principle-card"><h4>5. Tôn trọng giới hạn môn học</h4><p>Hỏi giảng viên về chính sách AI của từng học phần trước khi dùng. Tuân thủ dù không có cơ chế kiểm tra.</p></div>
+ <div class="principle-card"><h4>6. Học từ quá trình</h4><p>Tự hỏi: "Nếu AI làm thay, tôi học được gì?" Chủ động thực hành để phát triển kỹ năng thực sự.</p></div>
+ </div>
+
+ <h3> Tài liệu tham khảo</h3>
+ <ul>
+ <li>ĐHQGHN. (2025). Sinh viên ĐHQGHN sẽ học AI và công nghệ số từ năm nhất.</li>
+ <li>Quốc hội Việt Nam. (2025). Luật Trí tuệ nhân tạo số 134/2025/QH15.</li>
+ <li>ILO. (2023). ASEAN in Transformation: How Technology is Changing Jobs. Geneva.</li>
+ <li>Anthropic. (2026). Claude Sonnet 4.6 [Mô hình ngôn ngữ lớn]. Truy cập tháng 5/2026.</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- Footer -->
+ <footer>
+ <div class="footer-title">Đặng Khôi Nguyên</div>
+ <p class="footer-info">Sinh viên ngành Trí tuệ Nhân tạo</p>
+ <p class="footer-info">Đại học Quốc gia Hà Nội · MSSV: 25022963</p>
+ 
+ <div class="footer-social">
+ <a href="#" class="social-link" title="GitHub">⌥</a>
+ <a href="#" class="social-link" title="LinkedIn">in</a>
+ <a href="#" class="social-link" title="Email"></a>
+ </div>
+ 
+ <div class="footer-divider"></div>
+ <p class="footer-copyright">© 2026 Portfolio Dự án Cá nhân · Học phần VNU1001</p>
+ </footer>
+
+ <script>
+ // ===== PARTICLES GENERATOR =====
+ function createParticles() {
+ const container = document.getElementById('particles');
+ const count = window.innerWidth < 768 ? 15 : 30;
+ for (let i = 0; i < count; i++) {
+ const particle = document.createElement('div');
+ particle.className = 'particle';
+ const size = Math.random() * 4 + 2;
+ particle.style.width = size + 'px';
+ particle.style.height = size + 'px';
+ particle.style.left = Math.random() * 100 + '%';
+ particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+ particle.style.animationDelay = Math.random() * 5 + 's';
+ container.appendChild(particle);
+ }
+ }
+ createParticles();
+
+ // ===== TYPING EFFECT =====
+ const typingTexts = [
+ '> Khám phá AI trong Y tế & Viễn thông...',
+ '> Tư duy phản biện · Prompt Engineering · Đạo đức AI',
+ '> "Technology is best when it brings people together."',
+ '> Building responsible AI solutions...'
+ ];
+ let textIndex = 0, charIndex = 0, isDeleting = false;
+ const typingElement = document.getElementById('typingText');
+ 
+ function type() {
+ const current = typingTexts[textIndex];
+ if (isDeleting) {
+ typingElement.textContent = current.substring(0, charIndex - 1);
+ charIndex--;
+ } else {
+ typingElement.textContent = current.substring(0, charIndex + 1);
+ charIndex++;
+ }
+
+ let speed = isDeleting ? 30 : 60;
+ 
+ if (!isDeleting && charIndex === current.length) {
+ speed = 2000;
+ isDeleting = true;
+ } else if (isDeleting && charIndex === 0) {
+ isDeleting = false;
+ textIndex = (textIndex + 1) % typingTexts.length;
+ speed = 500;
+ }
+ setTimeout(type, speed);
+ }
+ setTimeout(type, 1500);
+
+ // ===== NAVBAR SCROLL EFFECT =====
+ window.addEventListener('scroll', () => {
+ const nav = document.getElementById('navbar');
+ if (window.scrollY > 50) nav.classList.add('scrolled');
+ else nav.classList.remove('scrolled');
+ });
+
+ // ===== MODAL LOGIC =====
+ function openModal(id) {
+ document.getElementById(id).classList.add('active');
+ document.body.style.overflow = 'hidden';
+ }
+
+ function closeModal(id) {
+ document.getElementById(id).classList.remove('active');
+ document.body.style.overflow = 'auto';
+ }
+
+ window.onclick = function(event) {
+ if (event.target.classList.contains('modal')) {
+ event.target.classList.remove('active');
+ document.body.style.overflow = 'auto';
+ }
+ }
+
+ document.addEventListener('keydown', function(event) {
+ if (event.key === "Escape") {
+ document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+ document.body.style.overflow = 'auto';
+ }
+ });
+
+ // ===== SCROLL ANIMATIONS =====
+ const observer = new IntersectionObserver((entries) => {
+ entries.forEach(entry => {
+ if (entry.isIntersecting) {
+ entry.target.classList.add('visible');
+ }
+ });
+ }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+ document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+ // ===== SKILL BARS =====
+ const skillObserver = new IntersectionObserver((entries) => {
+ entries.forEach(entry => {
+ if (entry.isIntersecting) {
+ entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+ bar.classList.add('animate');
+ });
+ }
+ });
+ }, { threshold: 0.3 });
+ document.querySelectorAll('.skills-section').forEach(el => skillObserver.observe(el));
+
+ // ===== SMOOTH SCROLL =====
+ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+ anchor.addEventListener('click', function(e) {
+ e.preventDefault();
+ const target = document.querySelector(this.getAttribute('href'));
+ if (target) {
+ target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+ }
+ });
+ });
+ </script>
+</body>
+</html>
